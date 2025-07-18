@@ -4,6 +4,35 @@
  * Replace them with your own styles or remove the file completely.
  */
 
+:root {
+    --wp-blocktails-brand: rgb(0 0 255 / 0.2);
+    --wp-blocktails-secondary: #f0f4fa;
+    --wp-blocktails-black: #000;
+    --wp-blocktails-white: #fff;
+}
+
 .wp-block-create-block-wp-blocktails {
-	border: 1px dotted #f00;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+    border: 2px solid var(--wp-blocktails-black);
+    box-shadow: 3px 3px 0px 0px var(--wp-blocktails-brand);
+
+    button {
+        cursor: pointer;
+        transition: .25s background-color;
+        padding: .5rem 1rem;
+
+        font-size: 1rem;
+
+        background: var(--wp-blocktails-white);
+        border: 1px solid var(--wp-blocktails-black);
+        box-shadow: 3px 3px 0px 0px var(--wp-blocktails-brand);
+
+        &:hover {
+            background: var(--wp-blocktails-secondary);
+        }
+    }
 }
