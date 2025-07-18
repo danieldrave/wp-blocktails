@@ -61,11 +61,9 @@ export default function WPBlocktail({ attributes, setAttributes }) {
     setCocktailRecipe(recipe);
     setAttributes({
       content: recipe,
-      id: recipe.strDrink
+      id: recipe.idDrink
     });
   };
-
-  console.log(`Attributes:`, attributes);
 
   return (
     <div {...useBlockProps() }>
