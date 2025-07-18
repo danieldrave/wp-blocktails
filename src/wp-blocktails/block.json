@@ -8,6 +8,13 @@
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
+    "attributes": {
+        "cocktail": {
+            "selector": "div",
+            "attribute": "data-wp-blocktail-id",
+            "type": "string"
+        }
+    },
 	"supports": {
 		"html": false
 	},

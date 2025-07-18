@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { useEffect, useState } from '@wordpress/element';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,10 +30,44 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+export default function WPBlocktail ({ attributes, setAttributes }) {
+  const [cocktail, setCocktailRecipe] = useState(null);
+
+  useEffect(() => {
+    // Only run this if it is a new block instance with no-preassigned cocktail
+    if (!attributes.cocktail && !cocktail) getCocktail();
+  });
+
+  const getData = async () => {
+    const url = `https://thecocktaildb.com/api/json/v1/1/random.php`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      // In a prod environment, I'd have this render as a localised toast / error message
+      console.error(error.message);
+      return;
+    }
+  };
+
+  const getCocktail = () => {
+    getData()
+      .then(({ drinks }) => setCocktail(drinks));
+  };
+
+  const setCocktail = (drinks) => {
+    const recipe = drinks.at(0);
+    setCocktailRecipe(recipe);
+    setAttributes({ cocktail: recipe.strDrink });
+  };
+
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'Wp Blocktails – hello from the editor!', 'wp-blocktails' ) }
+      <span>{ __( `${attributes?.cocktail}`, `wp-blocktails` ) }</span>
+			<button onClick={getCocktail}>
+				{ __( 'Mix it up!', 'wp-blocktails' ) }
+			</button>
 		</p>
 	);
 }
