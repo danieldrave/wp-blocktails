@@ -5,6 +5,11 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-wp-blocktails {
-
+:root {
+    --wp-blocktails-brand: rgb(0 0 255 / 0.2);
+    --wp-blocktails-secondary: #f0f4fa;
+    --wp-blocktails-black: #000;
+    --wp-blocktails-white: #fff;
 }
+
+.wp-block-create-block-wp-blocktails {}

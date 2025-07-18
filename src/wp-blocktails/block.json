@@ -8,15 +8,19 @@
 	"icon": "palmtree",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
-    "attributes": {
-        "cocktail": {
-            "selector": "div",
-            "attribute": "data-wp-blocktail-id",
-            "type": "string"
+	"attributes": {
+		"id": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "div",
+			"attribute": "data-wp-blocktail-id"
+		},
+        "content": {
+            "type": "object"
         }
-    },
+	},
 	"supports": {
-		"html": false
+		"html": true
 	},
 	"textdomain": "wp-blocktails",
 	"editorScript": "file:./index.js",

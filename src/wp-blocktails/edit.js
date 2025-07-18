@@ -30,13 +30,13 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function WPBlocktail ({ attributes, setAttributes }) {
+export default function WPBlocktail({ attributes, setAttributes }) {
   const [cocktail, setCocktailRecipe] = useState(null);
 
   useEffect(() => {
-    // Only run this if it is a new block instance with no-preassigned cocktail
-    if (!attributes.cocktail && !cocktail) getCocktail();
-  });
+    if (!attributes.id) getCocktail();
+    else setCocktailRecipe(attributes.content);
+  }, [attributes.id]);
 
   const getData = async () => {
     const url = `https://thecocktaildb.com/api/json/v1/1/random.php`;
@@ -59,15 +59,33 @@ export default function WPBlocktail ({ attributes, setAttributes }) {
   const setCocktail = (drinks) => {
     const recipe = drinks.at(0);
     setCocktailRecipe(recipe);
-    setAttributes({ cocktail: recipe.strDrink });
+    setAttributes({
+      content: recipe,
+      id: recipe.strDrink
+    });
   };
 
-	return (
-		<p { ...useBlockProps() }>
-      <span>{ __( `${attributes?.cocktail}`, `wp-blocktails` ) }</span>
-			<button onClick={getCocktail}>
-				{ __( 'Mix it up!', 'wp-blocktails' ) }
-			</button>
-		</p>
-	);
+  console.log(`Attributes:`, attributes);
+
+  return (
+    <div {...useBlockProps() }>
+      <div class="wp-blocktails-details">
+        <img
+          src={cocktail?.strDrinkThumb}
+          alt={cocktail?.strDrink}
+          height="64"
+          width="64"
+        />
+        <div class="wp-blocktails-details__content">
+          <span>{__(`${cocktail?.strDrink || ''}`)}</span>
+          <span>
+            {__(`${cocktail?.strCategory || ''} - ${cocktail?.strAlcoholic || ''}`)}
+          </span>
+        </div>
+      </div>
+      <button onClick={getCocktail}>
+        {__('Mix it up!', 'wp-blocktails')}
+      </button>
+    </div>
+  );
 }

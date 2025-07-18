@@ -19,7 +19,7 @@ export default function WPBlocktailSave({ attributes }) {
 	return (
 		<div
 			{ ...useBlockProps.save() }
-			data-wp-blocktail-id={attributes?.cocktail}
+			data-wp-blocktail-id={attributes.id}
 		></div>
 	);
 }
