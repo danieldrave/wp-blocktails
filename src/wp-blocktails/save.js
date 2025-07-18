@@ -15,10 +15,11 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save() {
+export default function WPBlocktailSave({ attributes }) {
 	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Wp Blocktails – hello from the saved content!' }
-		</p>
+		<div
+			{ ...useBlockProps.save() }
+			data-wp-blocktail-id={attributes?.cocktail}
+		></div>
 	);
 }

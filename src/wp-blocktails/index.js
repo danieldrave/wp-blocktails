@@ -18,7 +18,7 @@ import './style.scss';
  * Internal dependencies
  */
 import WPBlocktail from './edit';
-import save from './save';
+import WPBlocktailSave from './save';
 import metadata from './block.json';
 
 /**
@@ -35,5 +35,5 @@ registerBlockType( metadata.name, {
 	/**
 	 * @see ./save.js
 	 */
-	save,
+	save: WPBlocktailSave
 } );
